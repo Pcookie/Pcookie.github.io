@@ -93,12 +93,12 @@
 
 
 
-<meta name="description" content="建立tweak工程，最重要的就是配置theos。 这里插一段话，上一章讲了从无到用usbmuxd连接越狱手机，网上普遍文档是直接 ssh root@ip的 然后tweak的配置也是直接传到这个ip，而一部分讲的是usbmuxd用USB线连接越狱手机  然而，我遇到的困难是 ssh root@ip 无法直接连接到手机，也不是错误，就是无反应，哪怕有个错误也好，开一整晚都无反应，而用 ping ip">
+<meta name="description" content="摘要:    配置theos 新建第一个tweak工程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="逆向菜鸡的学习之路（二）">
 <meta property="og:url" content="http://Pcookie.github.io/2017/08/18/逆向菜鸡的学习之路（二）/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="建立tweak工程，最重要的就是配置theos。 这里插一段话，上一章讲了从无到用usbmuxd连接越狱手机，网上普遍文档是直接 ssh root@ip的 然后tweak的配置也是直接传到这个ip，而一部分讲的是usbmuxd用USB线连接越狱手机  然而，我遇到的困难是 ssh root@ip 无法直接连接到手机，也不是错误，就是无反应，哪怕有个错误也好，开一整晚都无反应，而用 ping ip">
+<meta property="og:description" content="摘要:    配置theos 新建第一个tweak工程">
 <meta property="og:image" content="http://pcookie.github.io/2017/08/18/逆向菜鸡的学习之路（二）/1889385-8e56856e500dc298.png">
 <meta property="og:image" content="http://pcookie.github.io/2017/08/18/逆向菜鸡的学习之路（二）/1889385-e44f07ed9dec52d0.png">
 <meta property="og:image" content="http://pcookie.github.io/2017/08/18/逆向菜鸡的学习之路（二）/1889385-a0c1cbde0267fe87.png">
@@ -109,10 +109,10 @@
 <meta property="og:image" content="http://pcookie.github.io/2017/08/18/逆向菜鸡的学习之路（二）/1889385-5bbf019eafd7030d.png">
 <meta property="og:image" content="http://pcookie.github.io/2017/08/18/逆向菜鸡的学习之路（二）/1889385-b2b80cbdb068f597.png">
 <meta property="og:image" content="http://pcookie.github.io/2017/08/18/逆向菜鸡的学习之路（二）/1889385-3cadc95a145a244e.png">
-<meta property="og:updated_time" content="2017-08-18T02:54:57.000Z">
+<meta property="og:updated_time" content="2017-08-18T07:17:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="逆向菜鸡的学习之路（二）">
-<meta name="twitter:description" content="建立tweak工程，最重要的就是配置theos。 这里插一段话，上一章讲了从无到用usbmuxd连接越狱手机，网上普遍文档是直接 ssh root@ip的 然后tweak的配置也是直接传到这个ip，而一部分讲的是usbmuxd用USB线连接越狱手机  然而，我遇到的困难是 ssh root@ip 无法直接连接到手机，也不是错误，就是无反应，哪怕有个错误也好，开一整晚都无反应，而用 ping ip">
+<meta name="twitter:description" content="摘要:    配置theos 新建第一个tweak工程">
 <meta name="twitter:image" content="http://pcookie.github.io/2017/08/18/逆向菜鸡的学习之路（二）/1889385-8e56856e500dc298.png">
 
 
@@ -331,7 +331,7 @@
       
 
       
-        <p>建立tweak工程，最重要的就是配置theos。</p>
+        <p>摘要:<br>    配置theos 新建第一个tweak工程<br><a id="more"></a><br>正文:<br>建立tweak工程，最重要的就是配置theos。</p>
 <p>这里插一段话，上一章讲了从无到用usbmuxd连接越狱手机，网上普遍文档是直接 ssh root@ip的 然后tweak的配置也是直接传到这个ip，而一部分讲的是usbmuxd用USB线连接越狱手机  然而，我遇到的困难是 ssh root@ip 无法直接连接到手机，也不是错误，就是无反应，哪怕有个错误也好，开一整晚都无反应，而用 ping ip 得到的是连接正常，关于这个问题请教过很多人，也包括大牛，都无法解决，所以这里后续会补充 如何在USB连接情况下 ssh传输数据给手机，这步也是卡了我这10天节奏的主要原因，我就一菜鸟，希望把我这一步一步东西，都分享给大家，我知道自己摸索有多麻烦，我也是直接摸索过来的。</p>
 <p>首先，安装theos。</p>
 <p>这里首先要注意路径问题，一开始不懂，自己在/opt/下建立了一个theos文件夹，后来没办法 用 rm -rf /opt/theos 删除重新安装，不然后面很多配置问题不能和网上对应，开始初学还是尽量都跟着主流教程走。</p>

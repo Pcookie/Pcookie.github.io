@@ -324,61 +324,14 @@
 
       
         
-          
-            <p>建立tweak工程，最重要的就是配置theos。</p>
-<p>这里插一段话，上一章讲了从无到用usbmuxd连接越狱手机，网上普遍文档是直接 ssh root@ip的 然后tweak的配置也是直接传到这个ip，而一部分讲的是usbmuxd用USB线连接越狱手机  然而，我遇到的困难是 ssh root@ip 无法直接连接到手机，也不是错误，就是无反应，哪怕有个错误也好，开一整晚都无反应，而用 ping ip 得到的是连接正常，关于这个问题请教过很多人，也包括大牛，都无法解决，所以这里后续会补充 如何在USB连接情况下 ssh传输数据给手机，这步也是卡了我这10天节奏的主要原因，我就一菜鸟，希望把我这一步一步东西，都分享给大家，我知道自己摸索有多麻烦，我也是直接摸索过来的。</p>
-<p>首先，安装theos。</p>
-<p>这里首先要注意路径问题，一开始不懂，自己在/opt/下建立了一个theos文件夹，后来没办法 用 rm -rf /opt/theos 删除重新安装，不然后面很多配置问题不能和网上对应，开始初学还是尽量都跟着主流教程走。</p>
-<p>在命令行 输入1、 export THEOS=/opt/theos  2、sudo git clone git://github.com/DHowett/theos.git $THEOS</p>
-<p>这时候使用  /opt/theos/bin/nic.pl （这句话是可以打开tweak模板）</p>
-<p>如果出现这个错误</p>
-<p>[error] Cowardly refusing to make a project inside $THEOS (/opt/theos/)</p>
-<p>这个需要修改.bash_profile文件就在路径~下 没有的自己建立就好 ‘.’表示隐藏文件 手动mac下不让建立  可以用touch 命令建立  然后用vi 在里面添加</p>
-<p>export THEOS=/opt/theos</p>
-<p>export PATH=/opt/theos/bin/:$PATH</p>
-<p>这两句话 这个就是路径问题  之所以上面说我自己建立了个theos文件夹 然后里面再装theos 我修改这里 为/opt/theos/theos 作用无效 不知道哪里有问题，为了避免扯太多麻烦，初学阶段暂不研究，就重装了theos。</p>
-<p>然后输入/opt/theos/bin/nic.pl</p>
-<p>这个时候应该就可以了  能够出现<br><img src="/2017/08/18/逆向菜鸡的学习之路（二）/1889385-8e56856e500dc298.png" alt="图片"><br>这个时候就说明theos安装成功  我们选择11，网上大多还是5，有点过时，可能你们装的时候也不是11了，注意选择tweak就好</p>
-<p>然后填写一些东西，什么bundle 组织名 作者 就是最后一条要注意，是安装完成后需要重启的应用，以进程名表示<br><img src="/2017/08/18/逆向菜鸡的学习之路（二）/1889385-e44f07ed9dec52d0.png" alt="图片"><br>cd到工程目录下 先用 命令 make 一下 我的理解 应该是编译的意思，</p>
-<p>Makefile:1: theos/makefiles/common.mk: No such file or directory</p>
-<p>Makefile:7: /framework.mk: No such file or directory</p>
-<p>make: <em>*</em> No rule to make target ‘/framework.mk’.Stop.</p>
-<p>如果出现如上错误 使用 ln -sf $THEOS 重新使用make</p>
-<p>这时候错误变成</p>
-<p>==&gt; Error:The vendor/include and/or vendor/lib directories are missing. Please run ‘git submodule update –init –recursive’ in your Theos directory. More information: <a href="https://github.com/theos/theos/wiki/Installation" target="_blank" rel="external">https://github.com/theos/theos/wiki/Installation</a>.</p>
-<p>make: <em>*</em> [before-all] Error 1</p>
-<p>说的很明白 让我们运行git submodule update –init –recursive这句话 ，都不用google了 这时候回到 theos目录下 使用sudo git submodule update –init –recursive 注意加上sudo 这里有权限问题</p>
-<p>然后再回到项目里面 使用make 这时候编译很顺利<br><img src="/2017/08/18/逆向菜鸡的学习之路（二）/1889385-a0c1cbde0267fe87.png" alt="图片"><br>不要注意yueyu两个字  这个tweak我来来回回建了3 4个吧 名字不重要</p>
-<p>这时候需要安装ldid，签名用的，这块我本来想理一下再发，还是先发一下吧  不然万一影响安装就抱歉了</p>
-<p>首先直接输入 ldid<br><img src="/2017/08/18/逆向菜鸡的学习之路（二）/1889385-5c18133881802f15.png" alt="图片"><br>应该是直接输入ldid  但我记得好像还下过一个ldid的包，不是很记得有没有影响，如果有影响，可以私聊我，把这个包发你们。</p>
-<p>应该是有影响的，你们可以自行网上下载个ldid 或者找我要一个，网上大多需要把ldid这个bin文件拷贝到/usr/bin目录下 但是mac这个文件夹权限不开放，不管用什么命令都无法将文件拷到这个目录下，这个很气啊，然后网上说可以/usr/local/bin用这个路径代替/usr/bin路径 因为会先从/usr/local/bin目录加载 然后再加载/usr/bin目录  不清楚是不是这个说法 </p>
-<p>sudo cp /Users/pro_cookie/Downloads/ldid /usr/local/bin</p>
-<p>然后使用这句 将文件拷贝到了 /usr/local/bin目录</p>
-<p>这样就算配置成功了  后来发现 我好蠢啊  好像使用brew install ldid就可以搞定这个 brew是个命令行安装工具的神器  没有的赶紧自行安装 别问我  因为我忘了 这个brew使用起来感觉和pip pod这些一样  很简单  另外提一点 网上很多N年前的版本  当时使用的命令是apt-get 等同于 brew  我之前很蠢  不明白  然后想安装个apt-get 安装死我了  后来因为好像验证还是什么证书问题 反正好像现在装不了了  大家都说用brew代替了这个apt-get</p>
-<p>好了  这个时候ldid也装好了  回到我们的工程来</p>
-<p>使用cat 命令可以直接看文件内容，很好的命令</p>
-<p>然后 说明一下 makefile文件是配置一些版本信息的  我给大家看一下我成功的配置<br><img src="/2017/08/18/逆向菜鸡的学习之路（二）/1889385-72daa81f22f4bade.png" alt="图片"><br>这里需要说明的，就是开头提到的USB连接方式ssh传输数据，网上有的是THEOS_DEVICE_IP = xxx.x.x.x 没有下面这句 export THEOS_DEVICE_PORT = 2222 因为他们都是wifi连接  。。。 我因为这句话至少卡了我5天时间 后来还是在公车上看帖子看到的，回来一试 果然成功了 export应该是多余的  只要后面的就好这里还需要注意的是  我的工程名是 secondTest  自己根据自己的工程名修改上面需要修改的地方 自己找不同啊</p>
-<p>然后是 Tweak.xm文件 这文件里面是我们要写的代码都写在这里面，初始模板的文件是都被注释掉的 运行起来 手机就springBoard刷新一下  然后没反应，我一开始不知道 还奇怪 代码都有 手机也有反应了 怎么没出效果  后来才发现被注释掉了<br><img src="/2017/08/18/逆向菜鸡的学习之路（二）/1889385-269e9e5bf26caa19.png" alt="图片"><br>上面部分是初始模板  我代码是%hook %end之间这段 </p>
-<p>然后运行make package install 就应该能传输到手机了<br><img src="/2017/08/18/逆向菜鸡的学习之路（二）/1889385-be761ca40253578d.jpeg" alt="图片"><br>中间还有一些错误解决 ，不太记得了 ，我在最后说一下吧</p>
-<p>Makefile:1: /makefiles/common.mk: No such file or directory</p>
-<p>Makefile:6: /tweak.mk: No such file or directory</p>
-<p>make: <em>*</em> No rule to make target ‘/tweak.mk’.Stop.</p>
-<p>如果出现这个错误  就需要export THEOS=/opt/theos一下</p>
-<p>==&gt; Error:/Applications/Xcode.app/Contents/Developer/usr/bin/make install requires that you set THEOS_DEVICE_IP in your environment.</p>
-<p>==&gt; Notice:It is also recommended that you have public-key authentication set up for root over SSH, or you will be entering your password a lot.</p>
-<p>make: <em>*</em> [internal-install] Error 1</p>
-<p>如果出现这个错误 就需要export THEOS_DEVICE_IP=127.0.0.1<br><img src="/2017/08/18/逆向菜鸡的学习之路（二）/1889385-5bbf019eafd7030d.png" alt="图片"><br>如果上传手机最后一步中出现了这个错误  就需要 这就比较麻烦了 和下面那个错误不一样  这个错误是我自己乱搞  不知道搞了什么搞出来的  后来 去theos重新找了deb.mk文件 这个文件千万不要乱修改</p>
-<p>dpkg-deb: error: obsolete compressiontype’lzma’; use xz instead Type dpkg-deb–helpforhelpabout manipulating<em>.deb files;Typedpkg–helpforhelpabout installing and deinstalling packages.make:**</em>[internal-package]Error2</p>
-<p>如果出现上面这个错误</p>
-<p>/opt/theos/makefiles/package</p>
-<p>sudo vi deb.mk  使用这句代码  上面那句是路径</p>
-<p>这里需要把lzma 改成xz 因为无法解压xz文件 注意 ！！！！这个文件里面还有一个错误</p>
-<p>$(ECHO_NOTHING)COPYFILE_DISABLE=1 $(FAKEROOT) -r dpkg-deb -Zgzip -b “$(THEOS_STAGING_DIR)” “$(_THEOS_DEB_PACKAGE_FILENAME)” $(STDERR_NULL_REDIRECT)$(ECHO_END)  </p>
-<p>这段替换我整出了一个无语的错误  然后选择重新替换掉deb.mk文件才解决  并不是原theos的deb.mk文件</p>
-<p>附上个连接<a href="https://github.com/moloch--/theos这个里面的/makefiles/package里面的deb.mk文件" target="_blank" rel="external">https://github.com/moloch--/theos这个里面的/makefiles/package里面的deb.mk文件</a> 替换之后好像连修改lzma变成xz都不需要了 我传个截图看看吧<br><img src="/2017/08/18/逆向菜鸡的学习之路（二）/1889385-b2b80cbdb068f597.png" alt="图片"><br><img src="/2017/08/18/逆向菜鸡的学习之路（二）/1889385-3cadc95a145a244e.png" alt="图片"></p>
-<p>自己摸索就是困难，希望有初学者能够互相交流一下，这个tweak的基本上所有坑都躺过 很多错误都没发表  有些找不到源头了  有些改文件里面的 忘了改了什么 实在对不住大家  不过记忆深的都发出来了  既然是记住的  说明比较麻烦  记不住的  说明大家自己查下就能很简单的解决了  </p>
-
-          
+          <p>摘要:<br>    配置theos 新建第一个tweak工程<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/18/逆向菜鸡的学习之路（二）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -487,17 +440,14 @@
 
       
         
-          
-            <p>去年11月的时候就想玩下逆向开发，那个时候手机版本还是10.0.1，越狱不了，没办法，终于这几天看到说PP助手支持10.0~10.2越狱，就赶紧搞起。</p>
-<p>工欲善其事必先利其器，逆向开发第一步，肯定是有个越狱手机，一切比较简单，下个PP助手一键越狱就好，可是我是mac电脑。。。日了，PP助手只有好像2.3版本，只能先装个虚拟机 然后装windows系统了  PP助手windows是5.0版本支持越狱。</p>
-<p>需要下载VMwareFusionPro855  虚拟机  然后 找个windows的iso镜像文件装好 基本没什么特别注意的地方  很简单就装好了 接下来就是用PP助手一键安装 顺便把系统更新提醒给关了</p>
-<p>越狱好后，第一步点开手机上的越狱后自动安装的cydia  里面会带有很多插件 等开发工具  及其叼~，安装个openssh，能提供手机端ssh服务。</p>
-<p><img src="/2017/08/18/逆向菜鸡的学习之路（一）/1889385-9732ca6e44d89bd5.png" alt="图片"><br>接下来就到了我想说入门极坑的重点。用命令行ssh连接手机。</p>
-<p>第一坑下载路径: 网上很简单 有直接 ssh root@192.168.xx.xxx的 有下载usbmuxd 然后再操作的 反正我是各种办法都试过 最后选择了下载usbmuxd 这种 最坑的是有攻略说用sudo port install usbmuxd 这TM简直了  我得去下port  然后怼半天  卡死 网上一搜  各种都说卡死 解决方案有啊  换源 换path 开全局VPN 。。。。最后我看到一条。。把port换了  好主意啊  这靠谱啊  用brew代替port  最后搞定   但是后来我找到个最简单的方法。。。我这里给一个下载路径<a href="https://cgit.sukimashita.com/usbmuxd.git/" target="_blank" rel="external">https://cgit.sukimashita.com/usbmuxd.git/</a> 然后自己找到下载1.0.8的版本的。。分分钟搞定各种问题</p>
-<p>第二坑:我之前Python文件 直接py xx.py运行 这次没成功。。然后只能google求助，有答案了  进入到usbmuxd下载后的文件python-client文件夹 然后chmod +x tcprelay.py 再./tcprelay.py -t 22:2222 这样才运行成功  这句话是把端口22的转移到2222上</p>
-<p>最后用ssh root@127.0.0.1 -p 2222 输入默认手机密码 alpine 完美进入手机列表<br><img src="/2017/08/18/逆向菜鸡的学习之路（一）/1889385-ae29c53a3eba078d.png" alt="图片"><br>中间还有很多坑，让我改ssh配置，重启ssh服务什么的。。我都忘了 光连接ssh就搞了我4个小时。。网上攻略及其不靠谱啊  按我的流程应该没问题 有问题可以留言我</p>
-
-          
+          <p>摘要:<br>    越狱环境配置 包括 搭设虚拟机 越狱手机 到ssh连接<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/18/逆向菜鸡的学习之路（一）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
