@@ -359,7 +359,7 @@
 <p>使用cat 命令可以直接看文件内容，很好的命令</p>
 <p>然后 说明一下 makefile文件是配置一些版本信息的  我给大家看一下我成功的配置<br><img src="/2017/08/18/逆向菜鸡的学习之路（二）/1889385-72daa81f22f4bade.png" alt="图片"><br>这里需要说明的，就是开头提到的USB连接方式ssh传输数据，网上有的是THEOS_DEVICE_IP = xxx.x.x.x 没有下面这句 export THEOS_DEVICE_PORT = 2222 因为他们都是wifi连接  。。。 我因为这句话至少卡了我5天时间 后来还是在公车上看帖子看到的，回来一试 果然成功了 export应该是多余的  只要后面的就好这里还需要注意的是  我的工程名是 secondTest  自己根据自己的工程名修改上面需要修改的地方 自己找不同啊</p>
 <p>然后是 Tweak.xm文件 这文件里面是我们要写的代码都写在这里面，初始模板的文件是都被注释掉的 运行起来 手机就springBoard刷新一下  然后没反应，我一开始不知道 还奇怪 代码都有 手机也有反应了 怎么没出效果  后来才发现被注释掉了<br><img src="/2017/08/18/逆向菜鸡的学习之路（二）/1889385-269e9e5bf26caa19.png" alt="图片"><br>上面部分是初始模板  我代码是%hook %end之间这段 </p>
-<p>然后运行make package install 就应该能传输到手机了<br><img src="/2017/08/18/逆向菜鸡的学习之路（二）/1889385-be761ca40253578d.png" alt="图片"><br>中间还有一些错误解决 ，不太记得了 ，我在最后说一下吧</p>
+<p>然后运行make package install 就应该能传输到手机了<br><img src="/2017/08/18/逆向菜鸡的学习之路（二）/1889385-be761ca40253578d.jpeg" alt="图片"><br>中间还有一些错误解决 ，不太记得了 ，我在最后说一下吧</p>
 <p>Makefile:1: /makefiles/common.mk: No such file or directory</p>
 <p>Makefile:6: /tweak.mk: No such file or directory</p>
 <p>make: <em>*</em> No rule to make target ‘/tweak.mk’.Stop.</p>
