@@ -99,13 +99,13 @@
 <meta property="og:url" content="http://Pcookie.github.io/2017/08/18/逆向菜鸡的学习之路（一）/index.html">
 <meta property="og:site_name" content="我的博客">
 <meta property="og:description" content="去年11月的时候就想玩下逆向开发，那个时候手机版本还是10.0.1，越狱不了，没办法，终于这几天看到说PP助手支持10.0~10.2越狱，就赶紧搞起。 工欲善其事必先利其器，逆向开发第一步，肯定是有个越狱手机，一切比较简单，下个PP助手一键越狱就好，可是我是mac电脑。。。日了，PP助手只有好像2.3版本，只能先装个虚拟机 然后装windows系统了  PP助手windows是5.0版本支持越狱。">
-<meta property="og:image" content="http://pcookie.github.io/2017/08/18/逆向菜鸡的学习之路（一）/8BEFDE17-005C-45A1-8D48-F8E7E8CA53D4.png">
-<meta property="og:image" content="https://github.com/Pcookie/Pcookie.github.io/raw/master/1.png">
-<meta property="og:updated_time" content="2017-08-18T02:36:28.000Z">
+<meta property="og:image" content="http://pcookie.github.io/2017/08/18/逆向菜鸡的学习之路（一）/1889385-9732ca6e44d89bd5.png">
+<meta property="og:image" content="http://pcookie.github.io/2017/08/18/逆向菜鸡的学习之路（一）/1889385-ae29c53a3eba078d.png">
+<meta property="og:updated_time" content="2017-08-18T02:41:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="逆向菜鸡的学习之路（一）">
 <meta name="twitter:description" content="去年11月的时候就想玩下逆向开发，那个时候手机版本还是10.0.1，越狱不了，没办法，终于这几天看到说PP助手支持10.0~10.2越狱，就赶紧搞起。 工欲善其事必先利其器，逆向开发第一步，肯定是有个越狱手机，一切比较简单，下个PP助手一键越狱就好，可是我是mac电脑。。。日了，PP助手只有好像2.3版本，只能先装个虚拟机 然后装windows系统了  PP助手windows是5.0版本支持越狱。">
-<meta name="twitter:image" content="http://pcookie.github.io/2017/08/18/逆向菜鸡的学习之路（一）/8BEFDE17-005C-45A1-8D48-F8E7E8CA53D4.png">
+<meta name="twitter:image" content="http://pcookie.github.io/2017/08/18/逆向菜鸡的学习之路（一）/1889385-9732ca6e44d89bd5.png">
 
 
 
@@ -327,10 +327,10 @@
 <p>工欲善其事必先利其器，逆向开发第一步，肯定是有个越狱手机，一切比较简单，下个PP助手一键越狱就好，可是我是mac电脑。。。日了，PP助手只有好像2.3版本，只能先装个虚拟机 然后装windows系统了  PP助手windows是5.0版本支持越狱。</p>
 <p>需要下载VMwareFusionPro855  虚拟机  然后 找个windows的iso镜像文件装好 基本没什么特别注意的地方  很简单就装好了 接下来就是用PP助手一键安装 顺便把系统更新提醒给关了</p>
 <p>越狱好后，第一步点开手机上的越狱后自动安装的cydia  里面会带有很多插件 等开发工具  及其叼~，安装个openssh，能提供手机端ssh服务。</p>
-<p><img src="/2017/08/18/逆向菜鸡的学习之路（一）/8BEFDE17-005C-45A1-8D48-F8E7E8CA53D4.png" alt="图片"><br>接下来就到了我想说入门极坑的重点。用命令行ssh连接手机。</p>
+<p><img src="/2017/08/18/逆向菜鸡的学习之路（一）/1889385-9732ca6e44d89bd5.png" alt="图片"><br>接下来就到了我想说入门极坑的重点。用命令行ssh连接手机。</p>
 <p>第一坑下载路径: 网上很简单 有直接 ssh root@192.168.xx.xxx的 有下载usbmuxd 然后再操作的 反正我是各种办法都试过 最后选择了下载usbmuxd 这种 最坑的是有攻略说用sudo port install usbmuxd 这TM简直了  我得去下port  然后怼半天  卡死 网上一搜  各种都说卡死 解决方案有啊  换源 换path 开全局VPN 。。。。最后我看到一条。。把port换了  好主意啊  这靠谱啊  用brew代替port  最后搞定   但是后来我找到个最简单的方法。。。我这里给一个下载路径<a href="https://cgit.sukimashita.com/usbmuxd.git/" target="_blank" rel="external">https://cgit.sukimashita.com/usbmuxd.git/</a> 然后自己找到下载1.0.8的版本的。。分分钟搞定各种问题</p>
 <p>第二坑:我之前Python文件 直接py xx.py运行 这次没成功。。然后只能google求助，有答案了  进入到usbmuxd下载后的文件python-client文件夹 然后chmod +x tcprelay.py 再./tcprelay.py -t 22:2222 这样才运行成功  这句话是把端口22的转移到2222上</p>
-<p>最后用ssh root@127.0.0.1 -p 2222 输入默认手机密码 alpine 完美进入手机列表<br><img src="https://github.com/Pcookie/Pcookie.github.io/raw/master/1.png" alt="图片"><br>中间还有很多坑，让我改ssh配置，重启ssh服务什么的。。我都忘了 光连接ssh就搞了我4个小时。。网上攻略及其不靠谱啊  按我的流程应该没问题 有问题可以留言我</p>
+<p>最后用ssh root@127.0.0.1 -p 2222 输入默认手机密码 alpine 完美进入手机列表<br><img src="/2017/08/18/逆向菜鸡的学习之路（一）/1889385-ae29c53a3eba078d.png" alt="图片"><br>中间还有很多坑，让我改ssh配置，重启ssh服务什么的。。我都忘了 光连接ssh就搞了我4个小时。。网上攻略及其不靠谱啊  按我的流程应该没问题 有问题可以留言我</p>
 
       
     </div>
@@ -376,6 +376,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/18/逆向菜鸡的学习之路（二）/" rel="prev" title="逆向菜鸡的学习之路（二）">
+                逆向菜鸡的学习之路（二） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -438,7 +442,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
