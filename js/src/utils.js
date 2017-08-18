@@ -46,42 +46,6 @@ NexT.utils = NexT.$u = {
     });
   },
 
-  /**
-   * Tabs tag listener (without twitter bootstrap).
-   */
-  registerTabsTag: function () {
-    var tNav = '.tabs ul.nav-tabs ';
-
-    // Binding `nav-tabs` & `tab-content` by real time permalink changing.
-    $(function() {
-      $(window).bind('hashchange', function() {
-        var tHash = location.hash;
-        if (tHash !== '') {
-          $(tNav + 'li:has(a[href="' + tHash + '"])').addClass('active').siblings().removeClass('active');
-          $(tHash).addClass('active').siblings().removeClass('active');
-        }
-      }).trigger('hashchange');
-    });
-
-    $(tNav + '.tab').on('click', function (href) {
-      href.preventDefault();
-      // Prevent selected tab to select again.
-      if(!$(this).hasClass('active')){
-
-        // Add & Remove active class on `nav-tabs` & `tab-content`.
-        $(this).addClass('active').siblings().removeClass('active');
-        var tActive = $(this).find('a').attr('href');
-        $(tActive).addClass('active').siblings().removeClass('active');
-
-        // Clear location hash in browser if #permalink exists.
-        if (location.hash !== '') {
-          history.pushState('', document.title, window.location.pathname + window.location.search);
-        }
-      }
-    });
-
-  },
-
   registerESCKeyEvent: function () {
     $(document).on('keyup', function (event) {
       var shouldDismissSearchPopup = event.which === 27 &&
@@ -162,8 +126,6 @@ NexT.utils = NexT.$u = {
         wrap.style.marginBottom = '20px';
         wrap.style.width = '100%';
         wrap.style.paddingTop = videoRatio + '%';
-        // Fix for appear inside tabs tag.
-        (wrap.style.paddingTop === '') && (wrap.style.paddingTop = '50%');
 
         // Add the iframe inside our newly created <div>
         var iframeParent = iframe.parentNode;
@@ -203,7 +165,7 @@ NexT.utils = NexT.$u = {
   addActiveClassToMenuItem: function () {
     var path = window.location.pathname;
     path = path === '/' ? path : path.substring(0, path.length - 1);
-    $('.menu-item a[href^="' + path + '"]:first').parent().addClass('menu-item-active');
+    $('.menu-item a[href="' + path + '"]').parent().addClass('menu-item-active');
   },
 
   hasMobileUA: function () {
@@ -237,7 +199,7 @@ NexT.utils = NexT.$u = {
   },
 
   displaySidebar: function () {
-    if (!this.isDesktop() || this.isPisces() || this.isGemini()) {
+    if (!this.isDesktop() || this.isPisces()) {
       return;
     }
     $('.sidebar-toggle').trigger('click');
@@ -249,10 +211,6 @@ NexT.utils = NexT.$u = {
 
   isPisces: function () {
     return CONFIG.scheme === 'Pisces';
-  },
-
-  isGemini: function () {
-    return CONFIG.scheme === 'Gemini';
   },
 
   getScrollbarWidth: function () {
@@ -271,6 +229,6 @@ NexT.utils = NexT.$u = {
    * @returns {Boolean}
    */
   needAffix: function () {
-    return this.isPisces() || this.isGemini();
+    return this.isPisces();
   }
 };

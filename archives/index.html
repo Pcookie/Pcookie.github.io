@@ -1,16 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 
 
 
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
 
 
 
@@ -75,7 +74,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -87,7 +86,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -110,10 +109,9 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
-    tabs: true,
     motion: true,
     duoshuo: {
       userId: '0',
@@ -138,6 +136,10 @@
 
 
   <title>归档 | 我的博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
 
 
@@ -147,9 +149,12 @@
 
 
 
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+
+
+
+
 
   
   
@@ -203,7 +208,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
+          <a href="/archives" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -213,7 +218,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
+          <a href="/tags" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -240,37 +245,33 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <section id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
+    <span class="archive-page-counter">
+      
+      
+      
         
-        
-        
-          
-        
-        嗯..! 目前共计 3 篇日志。 继续努力。
-      </span>
+      
+      嗯..! 目前共计 3 篇日志。 继续努力。
+    </span>
+
+    
 
       
+      
+      
 
+      
         
-        
-        
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
+        </div>
+      
+      
 
-        
-          
-          <div class="collection-title">
-            <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
-          </div>
-        
-        
-
-        
+      
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -298,16 +299,16 @@
 
 
 
+    
+
+      
+      
       
 
-        
-        
-        
+      
+      
 
-        
-        
-
-        
+      
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -335,16 +336,16 @@
 
 
 
+    
+
+      
+      
       
 
-        
-        
-        
+      
+      
 
-        
-        
-
-        
+      
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -372,13 +373,9 @@
 
 
 
-      
+    
 
-    </div>
-  </div>
-  
-  
-  
+  </section>
 
   
 
@@ -403,7 +400,6 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
-    
     <div class="sidebar-inner">
 
       
@@ -424,7 +420,7 @@
 
           
             <div class="site-state-item site-state-posts">
-              <a href="/archives/">
+              <a href="/archives">
                 <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">日志</span>
               </a>
@@ -494,32 +490,30 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Pcookie</span>
-
-  
 </div>
 
 
-  <div class="powered-by">
-    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-  </div>
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
 
-  <span class="post-meta-divider">|</span>
-
-  <div class="theme-info">
-    主题 &mdash;
-    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-      NexT.Muse
-    </a>
-  </div>
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+  总访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
 
 
         
-
-
-
-
-
-
 
         
       </div>
@@ -585,14 +579,21 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
 
   
   
@@ -605,7 +606,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
 
 
 
@@ -630,8 +631,16 @@
 
 
   
+    
+
+    
+  
 
 
+
+
+
+  
 
 
 
