@@ -100,7 +100,7 @@
 <meta property="og:site_name" content="我的博客">
 <meta property="og:description" content="摘要:    开始学习虫神的macOS软件安全与逆向分析，主要问题是可能排版有些问题，很多前面的坑的解决方案在后面，而我个人习惯前面遇到了问题先解决掉，然后往后看，导致后面才发现，自己查好久找到的解决方案，后面提到了，本文记录了第一章遇到的问题和解决方案思路">
 <meta property="og:image" content="http://pcookie.github.io/2017/09/05/macOS下搭建HT-Editor/63545D43-CF05-4994-ABBC-EE9182844EF9.png">
-<meta property="og:updated_time" content="2017-09-05T03:56:03.000Z">
+<meta property="og:updated_time" content="2017-09-05T06:24:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="macOS下搭建HT Editor">
 <meta name="twitter:description" content="摘要:    开始学习虫神的macOS软件安全与逆向分析，主要问题是可能排版有些问题，很多前面的坑的解决方案在后面，而我个人习惯前面遇到了问题先解决掉，然后往后看，导致后面才发现，自己查好久找到的解决方案，后面提到了，本文记录了第一章遇到的问题和解决方案思路">
@@ -343,7 +343,8 @@
       
 
       
-        <p>摘要:<br>    开始学习虫神的macOS软件安全与逆向分析，主要问题是可能排版有些问题，很多前面的坑的解决方案在后面，而我个人习惯前面遇到了问题先解决掉，然后往后看，导致后面才发现，自己查好久找到的解决方案，后面提到了，本文记录了第一章遇到的问题和解决方案思路<br><a id="more"></a><br>正文:<br>    在macOS上编译HT Editor的时候，遇到 执行 ./configure 后 成功  但输出结果存在如下<br>    X11 textmode support available: yes<br>    enable profiling: no<br>    make a release build: yes<br>    using included minilzo: yes<br>X11模式支持打开了  导致后面 执行 make的时候找不到X11头文件 这时候使用书中提到的 ./configure –disable-x11-text-mode 并不能解决这个问题，因为这句命令无法得到执行，这个尴尬了，百度google都找不到答案，只能靠自己了  本人解决思路如下 首先 这是一条配置 并且执行的是configure文件 所以去configure文件中找，使用文本编辑打开，搜索 ‘x11’ 很快定位到真正的命令<br><img src="/2017/09/05/macOS下搭建HT-Editor/63545D43-CF05-4994-ABBC-EE9182844EF9.png" alt="图片"><br>重新执行 ./configure –enable-x11-textmode=no 输出结果<br>    X11 textmode support available: no<br>再执行 make clean 然后 make 成功~</p>
+        <p>摘要:<br>    开始学习虫神的macOS软件安全与逆向分析，主要问题是可能排版有些问题，很多前面的坑的解决方案在后面，而我个人习惯前面遇到了问题先解决掉，然后往后看，导致后面才发现，自己查好久找到的解决方案，后面提到了，本文记录了第一章遇到的问题和解决方案思路<br><a id="more"></a><br>正文:<br>    在macOS上编译HT Editor的时候，遇到 执行 ./configure 后 成功  但输出结果存在如下</p>
+<p><pre><code><br>    X11 textmode support available: yes<br>    enable profiling: no<br>    make a release build: yes<br>    using included minilzo: yes<br></code></pre><br>X11模式支持打开了  导致后面 执行 make的时候找不到X11头文件 这时候使用书中提到的 ./configure –disable-x11-text-mode 并不能解决这个问题，因为这句命令无法得到执行，这个尴尬了，百度google都找不到答案，只能靠自己了  本人解决思路如下 首先 这是一条配置 并且执行的是configure文件 所以去configure文件中找，使用文本编辑打开，搜索 ‘x11’ 很快定位到真正的命令<br><img src="/2017/09/05/macOS下搭建HT-Editor/63545D43-CF05-4994-ABBC-EE9182844EF9.png" alt="图片"><br>重新执行 ./configure –enable-x11-textmode=no 输出结果<br>    X11 textmode support available: no<br>再执行 make clean 然后 make 成功~</p>
 
       
     </div>
