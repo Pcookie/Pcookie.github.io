@@ -99,7 +99,7 @@
 <meta property="og:url" content="http://Pcookie.github.io/2017/09/14/使用MokeyDev问题总结/index.html">
 <meta property="og:site_name" content="我的博客">
 <meta property="og:description" content="摘要:入坑逆向也有一段时间了，入门首选狗神的小黄书，安卓和macOS下关注虫神，iOS逆向一个超好用的工具monkeyDev，手动@庆哥，emmmm。。初学尽量还是从免工具开始吧，不然用多了就戒不掉了。。所以我才忍着不用这么好用的工具，本文集合了大多数使用者遇到的问题（大部分是我比较坑）, 大部分只是一句关键性的话, 还有可能是错的, 有错误请直接指出, pro_cookie@yeah.net,">
-<meta property="og:updated_time" content="2017-10-30T07:25:54.000Z">
+<meta property="og:updated_time" content="2017-10-31T06:31:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用MokeyDev问题总结">
 <meta name="twitter:description" content="摘要:入坑逆向也有一段时间了，入门首选狗神的小黄书，安卓和macOS下关注虫神，iOS逆向一个超好用的工具monkeyDev，手动@庆哥，emmmm。。初学尽量还是从免工具开始吧，不然用多了就戒不掉了。。所以我才忍着不用这么好用的工具，本文集合了大多数使用者遇到的问题（大部分是我比较坑）, 大部分只是一句关键性的话, 还有可能是错的, 有错误请直接指出, pro_cookie@yeah.net,">
@@ -351,7 +351,11 @@
 </code></pre><p>解决:<br>庆哥例子:</p>
 <pre><code>//getproperty
 NSString* password = CHIvar(self, _password, __strong NSString*);
-</code></pre><p>5、otool -fh查看可执行文件可以输出offset<br>6、thread info 查看当前线程<br>7、image lookup -a 指令地址 （好像是可以看指令跑什么位置  比如DATA段 TEXT段）<br>8、lldb解析出来的名字，应该是__lldb<em>unnamed</em>之类的（？不确定 Xcode问题 可能导致断点出奇怪的符号名）<br>9、钉钉据说里面有个叫DingTalkWatchApp的东西  要删掉或者统统重签名 codesign -f -s watch.app ?<br>10、<a href="https://github.com/rpetrich/CaptainHook/wiki" target="_blank" rel="external">CaptainHook</a><br>11、钉钉虚拟定位的时候，可能给定值不可以（张总说可能会监测gps晃动）<br>12、获取网页，自动输入qq等信息的时候，好像是做了个判断，如果是iOS，需要document.write(src)写入，不是的话，location.replace(src)就好<br>13、vmp 先下ptrace 触发后 下sysctl 再触发 2个断点都删掉<br>14、反hook肯定需要拿IMP指针，指针转换到实现地址需要dladdr，这两步可以看本地检测，服务器检测的话，基本上只检测位置有没有加nonce，获取wifi信息肯定是私有API，可以从dlopen和dlsym下手（如果用的exchange直接看_cmd就可以知道，如果是static swizzling可能看不出来 ？这句不确定）<br>15、用logos写一个dylib 在非越狱的机器上用<br>解决:<br>改一下MonkeyDev/Tools/pack.sh这个打包脚本 把dylib添加进去 加几行shell就好<br>16、x0~x7需要调用者自行保存，用的时候寄存器状态不确定，理论上在函数执行过程中都在fp~sp的区间的栈上 用sp加偏移取得寄存器在栈上的值<br>17、<a href="https://github.com/aozhimin/iOS-Debug-Hacks/blob/master/README_CN.md" target="_blank" rel="external">lldb以及一些arm基础</a><br>18、</p>
+</code></pre><p>5、otool -fh查看可执行文件可以输出offset<br>6、thread info 查看当前线程<br>7、image lookup -a 指令地址 （好像是可以看指令跑什么位置  比如DATA段 TEXT段）<br>8、lldb解析出来的名字，应该是__lldb<em>unnamed</em>之类的（？不确定 Xcode问题 可能导致断点出奇怪的符号名）<br>9、钉钉据说里面有个叫DingTalkWatchApp的东西  要删掉或者统统重签名 codesign -f -s watch.app ?<br>10、<a href="https://github.com/rpetrich/CaptainHook/wiki" target="_blank" rel="external">CaptainHook</a><br>11、钉钉虚拟定位的时候，可能给定值不可以（张总说可能会监测gps晃动）<br>12、获取网页，自动输入qq等信息的时候，好像是做了个判断，如果是iOS，需要document.write(src)写入，不是的话，location.replace(src)就好<br>13、vmp 先下ptrace 触发后 下sysctl 再触发 2个断点都删掉<br>14、反hook肯定需要拿IMP指针，指针转换到实现地址需要dladdr，这两步可以看本地检测，服务器检测的话，基本上只检测位置有没有加nonce，获取wifi信息肯定是私有API，可以从dlopen和dlsym下手（如果用的exchange直接看_cmd就可以知道，如果是static swizzling可能看不出来 ？这句不确定）<br>15、用logos写一个dylib 在非越狱的机器上用<br>解决:<br>改一下MonkeyDev/Tools/pack.sh这个打包脚本 把dylib添加进去 加几行shell就好<br>16、x0~x7需要调用者自行保存，用的时候寄存器状态不确定，理论上在函数执行过程中都在fp~sp的区间的栈上 用sp加偏移取得寄存器在栈上的值<br>17、<a href="https://github.com/aozhimin/iOS-Debug-Hacks/blob/master/README_CN.md" target="_blank" rel="external">lldb以及一些arm基础</a><br>18、可以用基于libiMobile的工具 访问系统RootFS 把 deb拷进去，在设备上找到iFile/Filza安装deb 或者直接CLI安装deb<br>19、WeChatRedEnvlop未越狱真机运行的时候一直提示dyld:Library not loaded:/Library/Frameworks/CydiaSubstrate.framework/CydiaSubstrate,但是我把CydiaSubstrate.framework放在WeChatRedEnvlopDylib的link binary下了，<br>解决:这是全局路径引用，需要设备上对应路径有，而很显然，非越狱设备上不可能有，Theos是支持非越狱模式的，使用MonkeyDev,update下 去 other link 把libsubstrate删了<br>20、小白注意~  MonkeyDev 需要把 theos 安装到 /opt路径下<br>21、</p>
+<pre><code>$ otool -l xxx | grep cryptid 
+  cryptid 0
+  cryptid 1
+</code></pre><p>砸壳后输出一个0 一个1 说明是两个arch , dumpdecrypted不会去做 arch 交换 ，所以这个arch没有解密 ，意思是只砸开了一种架构的壳，（用dump的话是这样的，所以要用lipo手动分割）导出头文件的的话 可以用 class-dump -arch 解密arch就可以了 , 加载架构顺序 arm64-&gt;armv7s-&gt;armv7<br>22、MonkeyDev创建工程 编译到手机 直接闪退 手机没越狱。<br>解决:需要添加依赖,详情看wiki。报错:signing for “xxxdylib” requires a development team. Select a development team in the project editor. 说明动态库也要选。<br>23、<a href="https://mandalorian.com/2013/05/03/decrypting-ios-binaries/" target="_blank" rel="external">张总提到LC_ENCRYPTION_INFO部分，emmmm…虽然现在不懂，以后应该能懂，留着</a><br>24</p>
 
       
     </div>
