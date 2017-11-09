@@ -99,7 +99,7 @@
 <meta property="og:url" content="http://Pcookie.github.io/2017/09/14/使用MokeyDev问题总结/index.html">
 <meta property="og:site_name" content="我的博客">
 <meta property="og:description" content="摘要:入坑逆向也有一段时间了，入门首选狗神的小黄书，安卓和macOS下关注虫神，iOS逆向一个超好用的工具monkeyDev，手动@庆哥，emmmm。。初学尽量还是从免工具开始吧，不然用多了就戒不掉了。。所以我才忍着不用这么好用的工具，本文主要收集了一些坑以及思路, 大部分只是一句关键性的话, 还有可能是错的, 有错误请直接指出, pro_cookie@yeah.net, 谢谢各位大佬。">
-<meta property="og:updated_time" content="2017-11-09T09:18:06.000Z">
+<meta property="og:updated_time" content="2017-11-09T09:19:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用MokeyDev问题总结">
 <meta name="twitter:description" content="摘要:入坑逆向也有一段时间了，入门首选狗神的小黄书，安卓和macOS下关注虫神，iOS逆向一个超好用的工具monkeyDev，手动@庆哥，emmmm。。初学尽量还是从免工具开始吧，不然用多了就戒不掉了。。所以我才忍着不用这么好用的工具，本文主要收集了一些坑以及思路, 大部分只是一句关键性的话, 还有可能是错的, 有错误请直接指出, pro_cookie@yeah.net, 谢谢各位大佬。">
@@ -356,7 +356,7 @@
 <li><a href="www.swiftyper.com">锅神</a></li>
 </ul>
 <p>1、<br>遇到使用OpenDev建的CaptainHook里面CHOptimizedMethod的方法中可以用</p>
-<pre><code>[self performSelector:@selector(testFunction)]
+<pre><code>[self performSelector:@selector(testFunction)];
 </code></pre><p>而MonkeyDev中这样调用就编译不过，并且尝试使用@class申明也不行的<br>解决:<br>方法一：<br>动态库可以只申明@interface不用@implementation<br>类似 庆哥 WechatPod<br>方法二：<br>OpenDev使用MRC<br>MonkeyDev使用ARC<br>使用-fno-objc-arc修改即可<br>2、<br>提示reveal.framework版本太新<br>解决: RevealServer.framework存放路径 自己替换版本/opt/MonkeyDev/Librarys<br>3、<br>每次调用函数 ，要先把地址放到x8寄存器，然后在函数内把东西copy出来，然后返回<br>解决<br><a href="https://satanwoo.github.io/2017/04/23/ARM64IndirectReturn/" target="_blank" rel="external">返回值超过16byte了</a><br>4、<br>获取实例变量比如</p>
 <pre><code>@interface A:NSObject {
   B* m;
