@@ -99,7 +99,7 @@
 <meta property="og:url" content="http://Pcookie.github.io/2017/09/14/使用MokeyDev问题总结/index.html">
 <meta property="og:site_name" content="我的博客">
 <meta property="og:description" content="摘要:入坑逆向也有一段时间了，入门首选狗神的小黄书，安卓和macOS下关注虫神，iOS逆向一个超好用的工具monkeyDev，手动@庆哥，emmmm。。初学尽量还是从免工具开始吧，不然用多了就戒不掉了。。所以我才忍着不用这么好用的工具，本文主要收集了一些坑以及思路, 大部分只是一句关键性的话, 还有可能是错的, 有错误请直接指出, pro_cookie@yeah.net, 谢谢各位大佬。">
-<meta property="og:updated_time" content="2017-11-10T03:46:16.000Z">
+<meta property="og:updated_time" content="2017-11-11T15:33:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用MokeyDev问题总结">
 <meta name="twitter:description" content="摘要:入坑逆向也有一段时间了，入门首选狗神的小黄书，安卓和macOS下关注虫神，iOS逆向一个超好用的工具monkeyDev，手动@庆哥，emmmm。。初学尽量还是从免工具开始吧，不然用多了就戒不掉了。。所以我才忍着不用这么好用的工具，本文主要收集了一些坑以及思路, 大部分只是一句关键性的话, 还有可能是错的, 有错误请直接指出, pro_cookie@yeah.net, 谢谢各位大佬。">
@@ -416,7 +416,7 @@ void printf_post_call(RegState *rs, ThreadStack *threadstack, CallStack *callsta
     }
     puts(&quot;printf-post-call&quot;);
 }
-</code></pre><p>相当于frida-js 里的this 的trick<br>78、<a href="https://github.com/ddeville/ImageLogger" target="_blank" rel="external">据说可以动态库load顺序 但是不太准的样子</a><br>79、低电量弹框 SBAlertItemController<br>80、动态调试过程中 已知一个地址  想知道属于哪个模块地址空间 jmpews说 image list 调用的是dyld暴露的函数， dyld是通过拿task_t的信息。 可能说的是想用 vm_region_recurse_64这个函数<br>81、logos tweak 项目中如何在打包的时候自动打包进mp3文件 解决:dpkg-deb命令打包 文件直接拖到项目中的package目录就行了 直接拖到项目中没用<br>82、举报黑产。。 codesign -dvvvv 提取证书ID 然后样本和ID 发给product-security@apple.com<br>83、微信之前发图片闪退 张总说是 Unicode控制字符 类似之前iOSCoreText Dos 利用Unicode控制字符/Combining Character造成看起来很短其实爆炸长的复杂字符串文本 然后CoreText渲染卡死 然后崩溃了<br>84、<a href="https://github.com/qhd/AHYMethodLog" target="_blank" rel="external">ANYMethodLog</a><br>85、oc swift混编 dump-z<br>86、libcurl做混淆（或者加前缀） 思路 <a href="http://mayuyu.io/2017/06/01/LLVMHacking-0x1" target="_blank" rel="external">llvmhacking-0x1</a> 已经编译好了的话 就parse头部查找符号表对应文本的索引地址 然后直接0x0填充<br>张总github上有个symbolcleaner  用的是native代码来做了替换 可以用python把native的也重新实现了 建议再llvm里直接搞 native编译好了再折腾太麻烦了 容错率也低 非要分开编译的话 可以自己制定重命名规则 比如全部把原来的名字变成加某个salt的hash 这样分开编译也可以正常link<br>87、</p>
+</code></pre><p>相当于frida-js 里的this 的trick<br>78、<a href="https://github.com/ddeville/ImageLogger" target="_blank" rel="external">据说可以动态库load顺序 但是不太准的样子</a><br>79、低电量弹框 SBAlertItemController<br>80、动态调试过程中 已知一个地址  想知道属于哪个模块地址空间 jmpews说 image list 调用的是dyld暴露的函数， dyld是通过拿task_t的信息。 可能说的是想用 vm_region_recurse_64这个函数<br>81、logos tweak 项目中如何在打包的时候自动打包进mp3文件 解决:dpkg-deb命令打包 文件直接拖到项目中的package目录就行了 直接拖到项目中没用<br>82、举报黑产。。 codesign -dvvvv 提取证书ID 然后样本和ID 发给product-security@apple.com<br>83、微信之前发图片闪退 张总说是 Unicode控制字符 类似之前iOSCoreText Dos 利用Unicode控制字符/Combining Character造成看起来很短其实爆炸长的复杂字符串文本 然后CoreText渲染卡死 然后崩溃了<br>84、<a href="https://github.com/qhd/AHYMethodLog" target="_blank" rel="external">ANYMethodLog</a><br>85、oc swift混编 dump-z<br>86、libcurl做混淆（或者加前缀） 思路 <a href="http://mayuyu.io/2017/06/01/LLVMHacking-0x1" target="_blank" rel="external">llvmhacking-0x1</a> 已经编译好了的话 就parse头部查找符号表对应文本的索引地址 然后直接0x0填充<br>张总github上有个symbolcleaner  用的是native代码来做了替换 可以用python把native的也重新实现了 建议再llvm里直接搞 native编译好了再折腾太麻烦了 容错率也低 非要分开编译的话 可以自己制定重命名规则 比如全部把原来的名字变成加某个salt的hash 这样分开编译也可以正常link<br>87、1709291609</p>
 
       
     </div>
