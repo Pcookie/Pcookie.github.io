@@ -1,0 +1,934 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="摘要:    区块链最近炒的沸沸扬扬，作为一名技术开发，也来试一下水，区块链技术还很年轻，网络上没有一篇文章能完全解决mac下以太坊环境配置，所以本人贡献一篇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mac下以太坊环境搭建以及挖出私有链创世区块">
+<meta property="og:url" content="http://Pcookie.github.io/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="摘要:    区块链最近炒的沸沸扬扬，作为一名技术开发，也来试一下水，区块链技术还很年轻，网络上没有一篇文章能完全解决mac下以太坊环境配置，所以本人贡献一篇">
+<meta property="og:image" content="http://pcookie.github.io/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/1.png">
+<meta property="og:image" content="http://pcookie.github.io/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/2.png">
+<meta property="og:image" content="http://pcookie.github.io/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/3.png">
+<meta property="og:image" content="http://pcookie.github.io/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/4.png">
+<meta property="og:image" content="http://pcookie.github.io/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/5.png">
+<meta property="og:image" content="http://pcookie.github.io/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/6.png">
+<meta property="og:updated_time" content="2018-03-14T08:16:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mac下以太坊环境搭建以及挖出私有链创世区块">
+<meta name="twitter:description" content="摘要:    区块链最近炒的沸沸扬扬，作为一名技术开发，也来试一下水，区块链技术还很年轻，网络上没有一篇文章能完全解决mac下以太坊环境配置，所以本人贡献一篇">
+<meta name="twitter:image" content="http://pcookie.github.io/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Pcookie.github.io/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/"/>
+
+
+
+
+
+  <title>mac下以太坊环境搭建以及挖出私有链创世区块 | 我的博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">我的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">我是一颗小韭菜</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            目录
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://Pcookie.github.io/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pcookie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/WechatIMG18.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mac下以太坊环境搭建以及挖出私有链创世区块</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-14T14:04:05+08:00">
+                2018-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘要:<br>    区块链最近炒的沸沸扬扬，作为一名技术开发，也来试一下水，区块链技术还很年轻，网络上没有一篇文章能完全解决mac下以太坊环境配置，所以本人贡献一篇</p>
+<a id="more"></a>
+<p>正文:</p>
+<p>本机系统 macOS Sierra 10.12.6</p>
+<p>环境配置</p>
+<p>(1) 安装python 这步mac是自带python2.7的 直接可以跳过</p>
+<p>brew install python</p>
+<p>(2) 安装solc(solidity语言编译器) 和solc-cli</p>
+<p>sudo npm install -g solc solc-cli –save-dev</p>
+<p>(3) 安装ethereum/cpp-ethereum(以太坊客户端geth)</p>
+<p>网络上文章一般使用如下步骤<a href="https://www.ethereum.org/cli" target="_blank" rel="external">官网教程链接</a></p>
+<p>brew update</p>
+<p>brew upgrade</p>
+<p>brew tag ethereum/ethereum</p>
+<p>brew install cpp-ethereum</p>
+<p>brew linkapps cpp-ethereum</p>
+<p>或者</p>
+<p>brew tag ethereum/ethereum</p>
+<p>brew install ethereum</p>
+<p>这步操作是有问题的  我在命令行中报了一个错误  没有错误提示  让我去github提issue 查找资料 觉得最大可能是不兼容的问题<br><img src="/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/1.png" alt="错误"><br><img src="/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/2.png" alt="官网只提供到10.11版本"></p>
+<p>这时候我们去下载release版本的客户端就好了  不需要从源码编译运行<a href="https://github.com/ethereum/mist/releases/" target="_blank" rel="external">release版本下载地址</a></p>
+<p>小技巧 与本文关系不大  但感觉还是要做的<br>下载release版本的客户端打开后 需要同步节点 不管是什么网络状态下 自己搭建的私有网络除外  节点数据是很大的  以太坊私有节点的数据近40个G  本人机器内存不够  所以想着把数据放在移动硬盘 本地做个文件夹路径映射  因为以太坊数据是默认放在固定路径(/Users/xxxxx/Library/Ethereum)下的  不能更改路径（本人没找到 谁知道的可以教我下） 所以唯一解决方法就是做文件夹路径映射</p>
+<p>方法如下  如果你是将A从B下面转移到C下面</p>
+<p>(1) cd B 进入到原始位置</p>
+<p>(2) ln -s C/A A 第一个路径是你准备转移去的位置  第二个路径是原始目录名</p>
+<p>可能用的时候有出现问题  请保证最后的结果是这样的<br><img src="/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/3.png" alt="图片"></p>
+<p>我们继续 现在eth开发环境以及配置差不多了(没记错的话)</p>
+<p>现在开始初始化我们的私有链以及挖矿交易 这步往后 其实网络上大部分文章都能走通 但有些点还是没有讲到 我总结一下好了 也给自己留个记录 东西总是忘的比较快</p>
+<p>区块都是一个接一个的创建 那么创世区块 也就是第一个区块怎么来的？ 需要一个配置文件 json格式<br>(1)创建一个文件夹 放自己的私有链 创建一个json文件 </p>
+<p>例子:</p>
+<pre><code>{
+  &quot;config&quot;: {  
+        &quot;chainId&quot;: 666,  
+        &quot;homesteadBlock&quot;: 0,  
+        &quot;eip155Block&quot;: 0,  
+        &quot;eip158Block&quot;: 0  
+    },  
+  &quot;alloc&quot;      : {},  
+  &quot;coinbase&quot;   : &quot;0x0000000000000000000000000000000000000000&quot;,  
+  &quot;difficulty&quot; : &quot;0x20000&quot;,  
+  &quot;extraData&quot;  : &quot;&quot;,  
+  &quot;gasLimit&quot;   : &quot;0x2fefd8&quot;,  
+  &quot;nonce&quot;      : &quot;0x0000000000000042&quot;,  
+  &quot;mixhash&quot;    : &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,  
+  &quot;parentHash&quot; : &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,  
+  &quot;timestamp&quot;  : &quot;0x00&quot;  
+}  
+</code></pre><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mixhash</td>
+<td>与nonce配合用于挖矿，由上一个区块的一部分生成的hash。注意他和nonce的设置需要满足以太坊的Yellow paper, 4.3.4. Block Header Validity, (44)章节所描述的条件。</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>nonce就是一个64位随机数，用于挖矿，注意他和mixhash的设置需要满足以太坊的Yellow paper, 4.3.4. Block Header Validity, (44)章节所描述的条件。</td>
+</tr>
+<tr>
+<td>difficulty</td>
+<td>设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度</td>
+</tr>
+<tr>
+<td>alloc</td>
+<td>用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以。</td>
+</tr>
+<tr>
+<td>coinbase</td>
+<td>矿工的账号，随便填</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>设置创世块的时间戳</td>
+</tr>
+<tr>
+<td>parentHash</td>
+<td>上一个区块的hash值，因为是创世块，所以这个值是0</td>
+</tr>
+<tr>
+<td>extraData</td>
+<td>附加信息，随便填，可以填你的个性信息  注意需要0x开头 我把文字转十六进制扔进去了</td>
+</tr>
+<tr>
+<td>gasLimit</td>
+<td>该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。</td>
+</tr>
+</tbody>
+</table>
+<p>###启动私有节点所需参数</p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>identity</td>
+<td>区块链的标示，随便填写，用于标示目前网络的名字</td>
+</tr>
+<tr>
+<td>init</td>
+<td>指定创世块文件的位置，并创建初始块</td>
+</tr>
+<tr>
+<td>datadir</td>
+<td>设置当前区块链网络数据存放的位置</td>
+</tr>
+<tr>
+<td>port</td>
+<td>网络监听端口</td>
+</tr>
+<tr>
+<td>rpc</td>
+<td>启动rpc通信，可以进行智能合约的部署和调试</td>
+</tr>
+<tr>
+<td>rpcapi</td>
+<td>设置允许连接的rpc的客户端，一般为db,eth,net,web3</td>
+</tr>
+<tr>
+<td>networkid</td>
+<td>设置当前区块链的网络ID，用于区分不同的网络，是一个数字</td>
+</tr>
+<tr>
+<td>console</td>
+<td>启动命令行模式，可以在Geth中执行命令</td>
+</tr>
+</tbody>
+</table>
+<p>本人启动eth所在目录为:</p>
+<pre><code>/Users/xxxxx/tmpPrivate 
+</code></pre><p>目录下放刚刚写好的创世json文件:genesis.json 如果没有特别想法 只是想练手  直接copy我上面那个json就好了<br>    执行命令 </p>
+<pre><code>geth --datadir &quot;./&quot; init genesis.json
+</code></pre><p>这边有几个常见的错误<br>Fatal: invalid genesis file: missing 0x prefix for hex data：这个错误信息意思很明白，就是你的json文件中，对于16进制数据，需要加上0x前缀</p>
+<p>Fatal: invalid genesis file: hex string has odd length: 从v1.6开始，设置的十六进制数值，不能是奇数位， 比如不能是0x0，而应该是0x00。</p>
+<p>Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的json文件中，缺少config部分。看到这个信息，我们不需要把geth退回到v1.5版本，而是需要加上config部分。</p>
+<p>Error: invalid sender undefined: 这个错误不会导致初始化失败，但是会在以后的转账（eth.sendTransaction），或者部署智能合约的时候产生。解决方法就是chainId 不能设置为0。 如果你完全按照github上给的官方配置文件，就会产生这个错误。</p>
+<p>如果成功，这时候目录下会多出geth和keystore两个文件夹 geth保存的是区块链相关数据 keystore中保存的是该链条中的用户信息</p>
+<p>初始化创世区块后，我们启动自己的私有链条</p>
+<pre><code>geth --datadir &quot;./&quot; --nodiscover --port &quot;35555&quot; console 2&gt;&gt;geth.log 
+</code></pre><p><img src="/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/4.png" alt="Geth JavaScript console"></p>
+<p>这里又有一个eth的自带bug  由于我们日志输出到geth.log文件中  所以下面我们挖矿的时候 miner.start() 输出是null  不再是正常的ture 这个是eth的bug</p>
+<p>这个时候我们可以打开另一个控制台 cd 到我们目录下  我的就是上面的tmpPrivate文件夹  看到是否出现了一个 geth.log文件  如果有的话 我们输入</p>
+<pre><code>tail -f geth.log  这句命令可以持续的输出以太坊的日志
+</code></pre><p>回到上一句命令出来的Geth JavaScript console 中<br>这时候私有链中没有账户 我们需要创建一个账户<br>输入命令 </p>
+<pre><code>personal.newAccount(&quot;Pcookie1&quot;) 该命令创建了一个新的用户，该用户密码是Pcookie1
+
+再次输入命令
+
+eth.accounts 我们发现用户组里已经有一个用户了
+
+我们可以再次创建一个用户 为下面转账做准备
+</code></pre><p>挖矿</p>
+<pre><code>这个控制台的语法是js语法 我们可以通过 
+user1 = eth.accounts[0] 把用户组里的第0位用户赋值给user1变量 类似的
+user2 = eth.accounts[1]
+
+我们再执行
+eth.getBalance(user1) 可以查看里面的余额
+
+执行
+eth.blockNumber 可以查看当前区块高度
+
+我们执行 
+miner.start() 一般文章中会说输出ture才成功 但是现在都是null 这个bug上面提过  
+miner.stop() 停止挖矿
+
+挖矿一般都会给默认第0位用户  也可以通过指定选择给哪个账户
+
+miner.setEtherbase(eth.accounts[1])
+
+挖一会儿后可以看看区块高度 以及账户里面是否增加了  以及可以看之前持续输出的控制台的打印日志
+</code></pre><p><img src="/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/5.png" alt="命令行输入"><br><img src="/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/6.png" alt="挖矿日志"></p>
+<p>转账  </p>
+<pre><code>以太坊环境 每隔一段时间自动会把账户锁定 所以几乎每次交易转账的时候都需要先解锁
+
+personal.unlockAccount(user2)
+
+输入密码 就是自己之前设定的账户密码
+
+执行
+
+amount = web3.toWei(1) 表示转账一个eth
+
+执行 
+
+eth.sendTransaction({from: user2, to: user1, value: amount})
+
+应该不要解释 就是从user2账户转账给user1
+
+这时候有些人会迫不及待用上面查询的语句看看是不是真的变了  结果发现没有变化 
+
+这个时候就是缺了个概念  就是挖矿的存在的意义  挖矿就是记账的意思  所以 每次转账 合约部署 之类的时候 需要用挖矿 把账记下来  
+我们执行miner.start()
+成功~
+</code></pre><p>这篇文章本来一周前就要写的。。一直没空。。发现挺多人有困惑的。。还是抽空写了。。后面再写合约部署  合约的代码solidty 版本编译也有很多坑 其实合约这东西  在我看来  只是一个物品交换的规则  就是逻辑 很简单  没什么写的必要  不过写个简单的走个流程  后面研究区块链底层技术  写一个自己的基础链  把btc思想写出来 还是会收获很多的  希望大家都能起飞</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/14/使用MokeyDev问题总结/" rel="next" title="使用MokeyDev问题总结">
+                <i class="fa fa-chevron-left"></i> 使用MokeyDev问题总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/WechatIMG18.jpeg"
+               alt="Pcookie" />
+          <p class="site-author-name" itemprop="name">Pcookie</p>
+           
+              <p class="site-description motion-element" itemprop="description">pro_cookie@yeah.net</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Pcookie</span>
+</div>
+
+
+<div class="powered-by">
+  Pcookie
+</div>
+
+<div class="theme-info">
+    -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+  总访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://pcookie-github-io.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://Pcookie.github.io/2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/';
+          this.page.identifier = '2018/03/14/mac下以太坊环境搭建以及挖出私有链创世区块/';
+          this.page.title = 'mac下以太坊环境搭建以及挖出私有链创世区块';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://pcookie-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2141902"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
